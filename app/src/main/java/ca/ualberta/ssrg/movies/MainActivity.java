@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import ca.ualberta.ssrg.androidelasticsearch.R;
@@ -20,7 +21,7 @@ public class MainActivity extends Activity {
 	private ArrayAdapter<Movie> moviesViewAdapter;
 	private ESMovieManager movieManager;
 	private MoviesController moviesController;
-
+	private EditText mEdit;
 	private Context mContext = this;
 
 	@Override
@@ -70,8 +71,8 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
-		
+
+
 		SearchThread thread = new SearchThread("*");
 
 		thread.start();
@@ -103,7 +104,10 @@ public class MainActivity extends Activity {
 		// TODO: Extract search query from text view
 		
 		// TODO: Run the search thread
-		
+		mEdit   = (EditText)findViewById(R.id.editText1);
+		SearchThread thread = new SearchThread(mEdit.getText().toString());
+
+		thread.start();
 	}
 	
 	/**
